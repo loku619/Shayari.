@@ -3,7 +3,6 @@ import Header from './components/Header';
 import PoetryGrid from './components/PoetryGrid';
 import Footer from './components/Footer';
 import { CssBaseline, Container } from '@mui/material';
-import backgroundTheme from './assets/images/backgroundTheme.png'
 function App() {
   return (
     <>
