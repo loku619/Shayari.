@@ -1,0 +1,58 @@
+/* Custom Swiper Container */
+.swiper {
+    position: relative;
+    padding-bottom: 50px; /* Space for pagination dots */
+  }
+  
+  /* Hover Effect on Images */
+  .swiper-image {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .swiper-image:hover {
+    transform: scale(1.1); /* Enlarge image on hover */
+  }
+  
+  /* Custom Navigation Arrows */
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: #000; /* Arrow color */
+    background-color: rgba(255, 255, 255, 0.8); /* Background color */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  
+  .swiper-button-next {
+    /* right: -20px; Position outside the image */
+  }
+  
+  .swiper-button-prev {
+    /* left: -20px; Position outside the image */
+  }
+  
+  /* Custom Pagination Dots */
+  .swiper-pagination {
+ 
+    display: none;
+  }
+  
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background-color: #000; /* Dot color */
+    opacity: 0.5;
+    margin: 0 5px;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .swiper-pagination-bullet-active {
+    opacity: 1; /* Active dot color */
+  }
