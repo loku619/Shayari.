@@ -1,7 +1,6 @@
-import React, {useState } from 'react';
-import { Grid, Paper, Typography, Box, useMediaQuery, Button } from '@mui/material';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules'; // Import Swiper modules
+import React from 'react';
+import { Grid, Paper, Typography, Box, useMediaQuery } from '@mui/material';
+
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
 import './CustomSwiper.css'; // Custom CSS for Swiper
 import "swiper/css";
@@ -59,19 +58,11 @@ const poetryImages = [
 const PoetryGrid = () => {
   const theme = useTheme();
 const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
-const itemsPerPage = 3; // Number of items per page
-const filteredPoetryImages = poetryImages.slice(0, -3);
-const [page, setPage] = useState(0);
-const totalPages = Math.ceil(filteredPoetryImages.length / itemsPerPage);
 
-const handleNext = () => {
-  setPage((prevPage) => (prevPage + 1) % totalPages);
-};
 
-const handlePrev = () => {
-  setPage((prevPage) => (prevPage - 1 + totalPages) % totalPages);
-};
+
+
+
 const settings = {
   dots: true,
   infinite: true,
