@@ -1,7 +1,7 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Avatar, Box, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/Logo.jpg";
 import Logo1 from "../assets/images/Logo1.png";
 
 const Header = () => {
@@ -22,9 +22,9 @@ const Header = () => {
           {/* Hide title on extra small screens */}
           <Typography 
             variant={isMobile ? "subtitle1" : "h6"} 
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "block", sm: "block" } }}
           >
-            Ashiqistan - The Nation of Lovers
+            Aashiqistan - The Nation of Lovers
           </Typography>
         </Box>
 

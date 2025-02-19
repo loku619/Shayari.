@@ -21,7 +21,7 @@ const Footer = () => {
       <Typography 
         variant={isMobile ? "body2" : "body1"} // Smaller text for mobile
       >
-        © 2025 Ashiqistan. All rights reserved.
+        © 2025 Aashiqistan. All rights reserved.
       </Typography>
     </Box>
   );

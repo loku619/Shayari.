@@ -1,5 +1,5 @@
-import React from 'react';
-import { Grid, Paper, Typography, Box, useMediaQuery } from '@mui/material';
+import React, {useState } from 'react';
+import { Grid, Paper, Typography, Box, useMediaQuery, Button } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules'; // Import Swiper modules
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
@@ -8,32 +8,34 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useTheme } from "@mui/material/styles";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 // Import your images (adjust paths as needed)
-import image1 from '../assets/images/image1.jpg';
-import image2 from '../assets/images/image2.jpg';
-import image3 from '../assets/images/image3.jpg';
-import image4 from "../assets/images/1734094059523.jpg";
-import image5 from "../assets/images/1734229451580.jpg";
-import image6 from "../assets/images/1734315287964.jpg";
-import image7 from "../assets/images/1734409474380.jpg";
-import image8 from "../assets/images/1734499007979.jpg";
-import image9 from "../assets/images/1734585282126.jpg";
-import image10 from "../assets/images/1734761995633.jpg";
-import image11 from "../assets/images/1734796361208.jpg";
-import image12 from "../assets/images/1734868415403.jpg";
-import image13 from "../assets/images/1734932912361.jpg";
-import image14 from "../assets/images/1734965749270.jpg";
-import image15 from "../assets/images/1735021242783.jpg";
-import image16 from "../assets/images/1735572498222.jpg";
-import image17 from "../assets/images/1735664903227.jpg";
-import image18 from "../assets/images/1735797598265.jpg";
-import image19 from "../assets/images/1735910129844.jpg"; 
-import image20 from "../assets/images/1736003139095.jpg";
+import image1 from '../assets/images/image1.png';
+//import image2 from '../assets/images/image2.png';
+import image3 from '../assets/images/image3.png';
+import image4 from "../assets/images/image4.png";
+import image5 from "../assets/images/image5.png";
+import image6 from "../assets/images/image6.png";
+import image7 from "../assets/images/image7.png";
+import image8 from "../assets/images/image8.png";
+import image9 from "../assets/images/image9.png";
+import image10 from "../assets/images/image10.png";
+// import image11 from "../assets/images/1734796361208.jpg";
+// import image12 from "../assets/images/1734868415403.jpg";
+// import image13 from "../assets/images/1734932912361.jpg";
+// import image14 from "../assets/images/1734965749270.jpg";
+// import image15 from "../assets/images/1735021242783.jpg";
+// import image16 from "../assets/images/1735572498222.jpg";
+// import image17 from "../assets/images/1735664903227.jpg";
+// import image18 from "../assets/images/1735797598265.jpg";
+// import image19 from "../assets/images/1735910129844.jpg"; 
+// import image20 from "../assets/images/1736003139095.jpg";
 
 const poetryImages = [
   { id: 1, src: image1 },
-  { id: 2, src: image2 },
+//  { id: 2, src: image2 },
   { id: 3, src: image3 },
   { id: 4, src: image4 },
   { id: 5, src: image5 },
@@ -42,24 +44,46 @@ const poetryImages = [
   { id: 8, src: image8 },
   { id: 9, src: image9 },
   { id: 10, src: image10 },
-  { id: 11, src: image11 },
-  { id: 12, src: image12 },
-  { id: 13, src: image13 },
-  { id: 14, src: image14 },
-  { id: 15, src: image15 },
-  { id: 16, src: image16 },
-  { id: 17, src: image17 },
-  { id: 18, src: image18 },
-  { id: 19, src: image19 },
-  { id: 20, src: image20 }
+  // { id: 11, src: image11 },
+  // { id: 12, src: image12 },
+  // { id: 13, src: image13 },
+  // { id: 14, src: image14 },
+  // { id: 15, src: image15 },
+  // { id: 16, src: image16 },
+  // { id: 17, src: image17 },
+  // { id: 18, src: image18 },
+  // { id: 19, src: image19 },
+  // { id: 20, src: image20 }
 ];
 
 const PoetryGrid = () => {
   const theme = useTheme();
 const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 const isTablet = useMediaQuery(theme.breakpoints.between("sm", "md"));
+const itemsPerPage = 3; // Number of items per page
+const filteredPoetryImages = poetryImages.slice(0, -3);
+const [page, setPage] = useState(0);
+const totalPages = Math.ceil(filteredPoetryImages.length / itemsPerPage);
 
+const handleNext = () => {
+  setPage((prevPage) => (prevPage + 1) % totalPages);
+};
+
+const handlePrev = () => {
+  setPage((prevPage) => (prevPage - 1 + totalPages) % totalPages);
+};
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  pauseOnHover: true,
+};
 return (
+  <>
   <div style={{ padding: "10px", position: "relative" }}>
     {/* Recent Posts Section */}
     <Box textAlign="center" mb={4}>
@@ -84,7 +108,7 @@ return (
           <Paper
             elevation={5}
             sx={{
-              padding: "12px",
+              padding: "8px",
               textAlign: "center",
               cursor: "pointer",
               background: "linear-gradient(135deg, #fce4ec, #f8bbd0)",
@@ -127,81 +151,34 @@ return (
         📜 More Poetry
       </Typography>
     </Box>
-
-    {/* Swiper Carousel */}
-    <Box
-      sx={{
-        position: "relative",
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {/* Custom Navigation Buttons */}
-      <Box
-        className="swiper-button-prev"
-        sx={{
-          position: "absolute",
-          left: isMobile ? "-10px" : "-50px", // Adjust for mobile
-          zIndex: 10,
-          background: "rgba(255, 255, 255, 0.8)",
-          padding: isMobile ? "10px" : "15px",
-          borderRadius: "50%",
-          boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-          cursor: "pointer",
-          transition: "transform 0.3s ease-in-out",
-          "&:hover": { background: "#ddd", transform: "scale(1.2)" },
-        }}
-      >
-        ❮
-      </Box>
-
-      <Swiper
-        modules={[Navigation, Pagination]}
-        spaceBetween={20}
-        slidesPerView={isMobile ? 1 : isTablet ? 2 : 3} // Adjust slides per view
-        navigation={{ nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }}
-        pagination={{ clickable: true, el: ".swiper-pagination" }}
-        loop={true}
-        style={{ marginBottom: "20px", width: "100%" }}
-      >
-        {poetryImages.slice(0, -3).map((poem) => (
-          <SwiperSlide key={poem.id}>
-            <img
-              src={poem.src}
-              alt={`Slide ${poem.id}`}
-              className="swiper-image"
-              style={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "8px",
-                cursor: "pointer",
-              }}
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-
-      <Box
-        className="swiper-button-next"
-        sx={{
-          position: "absolute",
-          right: isMobile ? "-10px" : "-50px", // Adjust for mobile
-          zIndex: 10,
-          background: "rgba(255, 255, 255, 0.8)",
-          padding: isMobile ? "10px" : "15px",
-          borderRadius: "50%",
-          boxShadow: "0px 4px 10px rgba(0,0,0,0.2)",
-          cursor: "pointer",
-          transition: "transform 0.3s ease-in-out",
-          "&:hover": { background: "#ddd", transform: "scale(1.2)" },
-        }}
-      >
-        ❯
-      </Box>
-    </Box>
+   
+   
+     
+      
+     
+  
   </div>
+ 
+  <Slider {...settings}>
+    {poetryImages.slice(0, -3).map((image, index) => (
+      <div key={index} style={{ textAlign: "center" }}>
+        <img
+          src={image.src}
+          alt={`Slide ${index + 1}`}
+          style={{
+            width: "100%",
+            maxHeight: "100%",
+            borderRadius: "12px",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+          }}
+          
+        />
+        
+      </div>
+    ))}
+  </Slider>
+
+  </>
 );
 };
 
