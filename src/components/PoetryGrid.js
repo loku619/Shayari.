@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Paper, Typography, Box, useMediaQuery } from '@mui/material';
-
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
 import './CustomSwiper.css'; // Custom CSS for Swiper
 import "swiper/css";
@@ -106,8 +107,8 @@ const PoetryGrid = () => {
                   borderRadius: "12px",
                   transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
                   position: "relative",
-                  zIndex: enlargedImage === poem.id ? 999 : 1, // ⬅ Increased z-index for enlarged images
-                  transform: enlargedImage === poem.id ? "scale(1.3)" : "scale(1)",
+                  zIndex: enlargedImage === poem.id ? 999 : 1, // High z-index when enlarged
+                //  transform: enlargedImage === poem.id ? "scale(1.3)" : "scale(1)",
                   boxShadow:
                     enlargedImage === poem.id
                       ? "0px 10px 20px rgba(0, 0, 0, 0.2)"
@@ -115,17 +116,18 @@ const PoetryGrid = () => {
                 }}
                 onClick={() => toggleEnlarge(poem.id)}
               >
-                <img
-                  src={poem.src}
-                  alt={`Poem ${poem.id}`}
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                    borderRadius: "10px",
-                    transition: "transform 0.3s ease-in-out",
-                  }}
-                  className="poetry-image"
-                />
+                <Zoom>
+                  <img
+                    src={poem.src}
+                    alt={`Poem ${poem.id}`}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      borderRadius: "10px",
+                      transition: "transform 0.3s ease-in-out",
+                    }}
+                  />
+                </Zoom>
               </Paper>
             </Grid>
           ))}
@@ -150,16 +152,18 @@ const PoetryGrid = () => {
       <Slider {...settings}>
         {poetryImages.slice(0, -3).map((image, index) => (
           <div key={index} style={{ textAlign: "center" }}>
-            <img
-              src={image.src}
-              alt={`Slide ${index + 1}`}
-              style={{
-                width: "100%",
-                maxHeight: "100%",
-                borderRadius: "12px",
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-              }}
-            />
+            <Zoom>
+              <img
+                src={image.src}
+                alt={`Slide ${index + 1}`}
+                style={{
+                  width: "100%",
+                  maxHeight: "100%",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+                }}
+              />
+            </Zoom>
           </div>
         ))}
       </Slider>
