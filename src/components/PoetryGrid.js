@@ -21,15 +21,15 @@ import image7 from "../assets/images/image7.png";
 import image8 from "../assets/images/image8.png";
 import image9 from "../assets/images/image9.png";
 import image10 from "../assets/images/image10.png";
-// import image11 from "../assets/images/1734796361208.jpg";
-// import image12 from "../assets/images/1734868415403.jpg";
-// import image13 from "../assets/images/1734932912361.jpg";
-// import image14 from "../assets/images/1734965749270.jpg";
-// import image15 from "../assets/images/1735021242783.jpg";
-// import image16 from "../assets/images/1735572498222.jpg";
-// import image17 from "../assets/images/1735664903227.jpg";
-// import image18 from "../assets/images/1735797598265.jpg";
-// import image19 from "../assets/images/1735910129844.jpg"; 
+// import image11 from "../assets/images/";
+import image12 from "../assets/images/image12.png";
+import image13 from "../assets/images/image13.png";
+import image14 from "../assets/images/image14.png";
+import image15 from "../assets/images/image15.png";
+import image16 from "../assets/images/image16.png";
+import image17 from "../assets/images/image17.png";
+import image18 from "../assets/images/image18.png";
+import image19 from "../assets/images/image19.png"; 
 // import image20 from "../assets/images/1736003139095.jpg";
 
 const poetryImages = [
@@ -44,14 +44,14 @@ const poetryImages = [
   { id: 9, src: image9 },
   { id: 10, src: image10 },
   // { id: 11, src: image11 },
-  // { id: 12, src: image12 },
-  // { id: 13, src: image13 },
-  // { id: 14, src: image14 },
-  // { id: 15, src: image15 },
-  // { id: 16, src: image16 },
-  // { id: 17, src: image17 },
-  // { id: 18, src: image18 },
-  // { id: 19, src: image19 },
+  { id: 12, src: image12 },
+  { id: 13, src: image13 },
+  { id: 14, src: image14 },
+  { id: 15, src: image15 },
+  { id: 16, src: image16 },
+  { id: 17, src: image17 },
+  { id: 18, src: image18 },
+  { id: 19, src: image19 },
   // { id: 20, src: image20 }
 ];
 
