@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Paper, Typography, Box, useMediaQuery } from '@mui/material';
 
 import 'swiper/swiper-bundle.css'; // Import Swiper styles
@@ -57,120 +57,114 @@ const poetryImages = [
 
 const PoetryGrid = () => {
   const theme = useTheme();
-const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [enlargedImage, setEnlargedImage] = useState(null);
 
+  const toggleEnlarge = (id) => {
+    setEnlargedImage(enlargedImage === id ? null : id);
+  };
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+  };
 
-
-
-const settings = {
-  dots: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
-  pauseOnHover: true,
-};
-return (
-  <>
-  <div style={{ padding: "10px", position: "relative" }}>
-    {/* Recent Posts Section */}
-    <Box textAlign="center" mb={4}>
-      <Typography
-        variant={isMobile ? "h5" : "h4"}
-        fontWeight="bold"
-        gutterBottom
-        sx={{
-          display: "inline-block",
-          borderBottom: "4px solid #d81b60",
-          color: "black",
-        }}
-      >
-        🌿 Recent Posts...
-      </Typography>
-    </Box>
-
-    {/* Responsive Grid Layout */}
-    <Grid container spacing={isMobile ? 2 : 4}>
-      {poetryImages.slice(-3).map((poem) => (
-        <Grid item key={poem.id} xs={12} sm={6} md={4}>
-          <Paper
-            elevation={5}
+  return (
+    <>
+      <div style={{ padding: "10px", position: "relative" }}>
+        <Box textAlign="center" mb={4}>
+          <Typography
+            variant={isMobile ? "h5" : "h4"}
+            fontWeight="bold"
+            gutterBottom
             sx={{
-              padding: "8px",
-              textAlign: "center",
-              cursor: "pointer",
-              background: "linear-gradient(135deg, #fce4ec, #f8bbd0)",
-              borderRadius: "12px",
-              transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-              "&:hover": {
-                transform: "scale(1.3)",
-                boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
-              },
+              display: "inline-block",
+              borderBottom: "4px solid #d81b60",
+              color: "black",
             }}
           >
+            🌿 Recent Posts...
+          </Typography>
+        </Box>
+
+        <Grid container spacing={isMobile ? 2 : 4}>
+          {poetryImages.slice(-3).map((poem) => (
+            <Grid item key={poem.id} xs={12} sm={6} md={4}>
+              <Paper
+                elevation={5}
+                sx={{
+                  padding: "8px",
+                  textAlign: "center",
+                  cursor: "pointer",
+                  background: "linear-gradient(135deg, #fce4ec, #f8bbd0)",
+                  borderRadius: "12px",
+                  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+                  position: "relative",
+                  zIndex: enlargedImage === poem.id ? 999 : 1, // ⬅ Increased z-index for enlarged images
+                  transform: enlargedImage === poem.id ? "scale(1.3)" : "scale(1)",
+                  boxShadow:
+                    enlargedImage === poem.id
+                      ? "0px 10px 20px rgba(0, 0, 0, 0.2)"
+                      : "none",
+                }}
+                onClick={() => toggleEnlarge(poem.id)}
+              >
+                <img
+                  src={poem.src}
+                  alt={`Poem ${poem.id}`}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "10px",
+                    transition: "transform 0.3s ease-in-out",
+                  }}
+                  className="poetry-image"
+                />
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Box textAlign="center" mt={5} mb={2}>
+          <Typography
+            variant={isMobile ? "h5" : "h4"}
+            fontWeight="bold"
+            gutterBottom
+            sx={{
+              display: "inline-block",
+              borderBottom: "4px solid #d81b60",
+              color: "black",
+            }}
+          >
+            📜 More Poetry
+          </Typography>
+        </Box>
+      </div>
+
+      <Slider {...settings}>
+        {poetryImages.slice(0, -3).map((image, index) => (
+          <div key={index} style={{ textAlign: "center" }}>
             <img
-              src={poem.src}
-              alt={`Poem ${poem.id}`}
+              src={image.src}
+              alt={`Slide ${index + 1}`}
               style={{
                 width: "100%",
-                height: "auto",
-                borderRadius: "10px",
-                transition: "transform 0.3s ease-in-out",
+                maxHeight: "100%",
+                borderRadius: "12px",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
               }}
-              className="poetry-image"
             />
-          </Paper>
-        </Grid>
-      ))}
-    </Grid>
-
-    {/* Swiper Section */}
-    <Box textAlign="center" mt={5} mb={2}>
-      <Typography
-        variant={isMobile ? "h5" : "h4"}
-        fontWeight="bold"
-        gutterBottom
-        sx={{
-          display: "inline-block",
-          borderBottom: "4px solid #d81b60",
-          color: "black",
-        }}
-      >
-        📜 More Poetry
-      </Typography>
-    </Box>
-   
-   
-     
-      
-     
-  
-  </div>
- 
-  <Slider {...settings}>
-    {poetryImages.slice(0, -3).map((image, index) => (
-      <div key={index} style={{ textAlign: "center" }}>
-        <img
-          src={image.src}
-          alt={`Slide ${index + 1}`}
-          style={{
-            width: "100%",
-            maxHeight: "100%",
-            borderRadius: "12px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-          }}
-          
-        />
-        
-      </div>
-    ))}
-  </Slider>
-
-  </>
-);
+          </div>
+        ))}
+      </Slider>
+    </>
+  );
 };
 
 export default PoetryGrid;
